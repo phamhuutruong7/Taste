@@ -10,6 +10,6 @@ namespace Taste.Utility
         public const string FrontDeskRole = "FrontDesk";
         public const string KitchenRole = "Kitchen";
         public const string CustomerRole = "Customer";
-        
+        public const string ShoppingCart = "ShoppingCart";
     }
 }
