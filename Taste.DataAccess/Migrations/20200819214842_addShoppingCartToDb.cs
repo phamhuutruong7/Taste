@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Taste.DataAccess.Migrations
 {
@@ -11,7 +12,6 @@ namespace Taste.DataAccess.Migrations
                 table: "AspNetUserTokens",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(128)",
                 oldMaxLength: 128);
 
             migrationBuilder.AlterColumn<string>(
@@ -19,7 +19,6 @@ namespace Taste.DataAccess.Migrations
                 table: "AspNetUserTokens",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(128)",
                 oldMaxLength: 128);
 
             migrationBuilder.AlterColumn<string>(
@@ -27,7 +26,6 @@ namespace Taste.DataAccess.Migrations
                 table: "AspNetUserLogins",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(128)",
                 oldMaxLength: 128);
 
             migrationBuilder.AlterColumn<string>(
@@ -35,7 +33,6 @@ namespace Taste.DataAccess.Migrations
                 table: "AspNetUserLogins",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(128)",
                 oldMaxLength: 128);
 
             migrationBuilder.CreateTable(
@@ -43,8 +40,8 @@ namespace Taste.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MenuItemId = table.Column<string>(nullable: true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    MenuItemId = table.Column<int>(nullable: false),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     Count = table.Column<int>(nullable: false)
                 },
@@ -62,7 +59,6 @@ namespace Taste.DataAccess.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "AspNetUserTokens",
-                type: "nvarchar(128)",
                 maxLength: 128,
                 nullable: false,
                 oldClrType: typeof(string));
@@ -70,7 +66,6 @@ namespace Taste.DataAccess.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "LoginProvider",
                 table: "AspNetUserTokens",
-                type: "nvarchar(128)",
                 maxLength: 128,
                 nullable: false,
                 oldClrType: typeof(string));
@@ -78,7 +73,6 @@ namespace Taste.DataAccess.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "ProviderKey",
                 table: "AspNetUserLogins",
-                type: "nvarchar(128)",
                 maxLength: 128,
                 nullable: false,
                 oldClrType: typeof(string));
@@ -86,7 +80,6 @@ namespace Taste.DataAccess.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "LoginProvider",
                 table: "AspNetUserLogins",
-                type: "nvarchar(128)",
                 maxLength: 128,
                 nullable: false,
                 oldClrType: typeof(string));

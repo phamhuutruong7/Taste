@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Stripe.BillingPortal;
 using Taste.DataAccess.Data.Repository;
 using Taste.DataAccess.Data.Repository.IRepository;
 using Taste.Models;
@@ -29,7 +30,7 @@ namespace Taste.Pages.Customer.Home
 
             if(claim != null)
             {
-                int shoppingCartCount = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).ToList().Count;
+                var shoppingCartCount = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).ToList().Count;
                 HttpContext.Session.SetInt32(SD.ShoppingCart, shoppingCartCount);
             }
 
