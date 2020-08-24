@@ -16,6 +16,8 @@ using Taste.DataAccess;
 using Taste.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Taste.Utility;
+using Stripe;
+using Microsoft.AspNetCore.Authentication.Facebook;
 
 namespace Taste
 {
@@ -51,6 +53,8 @@ namespace Taste
                 options.Cookie.IsEssential = true;
             });
 
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
             //add MVC
             services.AddMvc(options => options.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
@@ -58,6 +62,17 @@ namespace Taste
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             //services.AddRazorPages().AddRazorRuntimeCompilation();
+
+            services.AddAuthentication().AddFacebook(facebookOptions => {
+                facebookOptions.AppId = "3143731685746545";
+                facebookOptions.AppSecret = "2947dd4d373457f579badb7539d4c694";
+            });
+
+            services.AddAuthentication().AddMicrosoftAccount(options => { 
+                options.ClientId = "c9dd6fe0-1630-43e0-bf71-8b8bfbea73ce";
+                options.ClientSecret = "DkH~v84r.Y7UhRg31D79__~M4qRVZky-CN";
+            });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,6 +104,7 @@ namespace Taste
             });
             */
             app.UseMvc();
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
         }
     }
 }
