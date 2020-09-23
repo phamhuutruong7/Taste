@@ -56,9 +56,10 @@ namespace Taste
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
 
             //add MVC
-            services.AddMvc(options => options.EnableEndpointRouting = false)
-                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
+            //services.AddMvc(options => options.EnableEndpointRouting = false)
+            //    .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
 
+            services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             //services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -95,15 +96,21 @@ namespace Taste
             app.UseSession();
             //app.UseRouting();
 
+            app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
+            });
 
             /*app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
             });
             */
-            app.UseMvc();
+            //app.UseMvc();
             StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
         }
     }
